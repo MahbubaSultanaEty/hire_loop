@@ -30,8 +30,8 @@ export default function Navbar() {
             justify-between
             rounded-2xl
             border
-            border-white/10
-            bg-[#0F1117]/70
+            border-purple-500/10
+            bg-[#0F1117]/80
             backdrop-blur-xl
             shadow-[0_8px_32px_rgba(0,0,0,0.35)]
           "
@@ -47,20 +47,19 @@ export default function Navbar() {
                 justify-center
                 rounded-xl
                 bg-gradient-to-br
-                from-indigo-500
-                to-violet-600
+                from-purple-600
+                to-cyan-500
                 shadow-lg
-                shadow-indigo-500/30
+                shadow-purple-500/30
               "
             >
               <BriefcaseBusiness size={20} className="text-white" />
             </div>
 
-            <div>
-              <h2 className="text-white font-bold tracking-tight text-lg">
-                DevHire
-              </h2>
-            </div>
+            <h2 className="font-bold tracking-tight text-lg">
+              <span className="text-white">Hire</span>
+              <span className="text-purple-400">Loop</span>
+            </h2>
           </div>
 
           {/* Desktop Nav */}
@@ -75,7 +74,7 @@ export default function Navbar() {
                       text-sm
                       font-medium
                       text-white/60
-                      hover:text-white
+                      hover:text-purple-400
                       transition-all
                       duration-300
 
@@ -84,7 +83,7 @@ export default function Navbar() {
                       after:-bottom-1
                       after:h-[2px]
                       after:w-0
-                      after:bg-indigo-500
+                      after:bg-purple-500
                       after:transition-all
                       after:duration-300
 
@@ -97,6 +96,8 @@ export default function Navbar() {
               ))}
             </ul>
 
+            <div className="h-6 w-px bg-white/10" />
+
             <div className="flex items-center gap-3 ml-4">
               <Button
                 as={Link}
@@ -104,11 +105,11 @@ export default function Navbar() {
                 variant="ghost"
                 className="
                   border
-                  border-white/10
-                  bg-white/[0.03]
-                  text-white/80
-                  hover:bg-white/[0.06]
-                  hover:text-white
+                  border-purple-500/20
+                  bg-purple-500/5
+                  text-purple-300
+                  hover:bg-purple-500/10
+                  hover:text-purple-200
                   transition-all
                 "
               >
@@ -119,15 +120,13 @@ export default function Navbar() {
                 as={Link}
                 href="/register"
                 className="
-                  bg-indigo-600
-                  hover:bg-indigo-500
+                  bg-purple-600
+                  hover:bg-purple-500
                   text-white
                   font-medium
-
                   shadow-lg
-                  shadow-indigo-500/25
-
-                  hover:shadow-indigo-500/40
+                  shadow-purple-500/25
+                  hover:shadow-purple-500/40
                   transition-all
                 "
               >
@@ -149,9 +148,9 @@ export default function Navbar() {
                 justify-center
                 rounded-xl
                 border
-                border-white/10
-                bg-white/[0.03]
-                text-white
+                border-purple-500/20
+                bg-purple-500/5
+                text-purple-300
               "
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -166,8 +165,8 @@ export default function Navbar() {
               mt-3
               rounded-2xl
               border
-              border-white/10
-              bg-[#0F1117]/90
+              border-purple-500/10
+              bg-[#0F1117]/95
               backdrop-blur-xl
               p-4
               md:hidden
@@ -184,8 +183,8 @@ export default function Navbar() {
                       px-4
                       py-3
                       text-white/70
-                      hover:text-white
-                      hover:bg-white/[0.05]
+                      hover:text-purple-400
+                      hover:bg-purple-500/10
                       transition-all
                     "
                   >
@@ -195,15 +194,16 @@ export default function Navbar() {
               ))}
             </ul>
 
-            <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4">
+            <div className="mt-4 flex flex-col gap-2 border-t border-purple-500/10 pt-4">
               <Button
                 as={Link}
                 href="/login"
                 variant="ghost"
                 className="
                   border
-                  border-white/10
-                  text-white/80
+                  border-purple-500/20
+                  bg-purple-500/5
+                  text-purple-300
                   w-full
                 "
               >
@@ -214,7 +214,8 @@ export default function Navbar() {
                 as={Link}
                 href="/register"
                 className="
-                  bg-indigo-600
+                  bg-purple-600
+                  hover:bg-purple-500
                   text-white
                   w-full
                 "
