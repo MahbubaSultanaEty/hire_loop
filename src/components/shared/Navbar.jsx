@@ -19,8 +19,8 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-4 z-50 px-4">
-      <div className="max-w-7xl mx-auto">
+    <nav className="absolute top-4 left-0 right-0 z-50 px-4">
+      <div className="max-w-7xl  mx-auto">
         <header
           className="
             h-16
@@ -31,7 +31,7 @@ export default function Navbar() {
             rounded-2xl
             border
             border-purple-500/10
-            bg-[#0F1117]/80
+            bg-black/40
             backdrop-blur-xl
             shadow-[0_8px_32px_rgba(0,0,0,0.35)]
           "
@@ -73,7 +73,7 @@ export default function Navbar() {
                       relative
                       text-sm
                       font-medium
-                      text-white/60
+                      text-white/80
                       hover:text-purple-400
                       transition-all
                       duration-300
@@ -105,7 +105,7 @@ export default function Navbar() {
                 variant="ghost"
                 className="
                   border
-                  border-purple-500/20
+                  border-white
                   bg-purple-500/5
                   text-purple-300
                   hover:bg-purple-500/10
@@ -150,7 +150,7 @@ export default function Navbar() {
                 border
                 border-purple-500/20
                 bg-purple-500/5
-                text-purple-300
+                text-white
               "
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -166,7 +166,7 @@ export default function Navbar() {
               rounded-2xl
               border
               border-purple-500/10
-              bg-[#0F1117]/95
+              bg-[#0F1117]/40
               backdrop-blur-xl
               p-4
               md:hidden
@@ -201,7 +201,7 @@ export default function Navbar() {
                 variant="ghost"
                 className="
                   border
-                  border-purple-500/20
+                  border-white
                   bg-purple-500/5
                   text-purple-300
                   w-full

@@ -47,14 +47,14 @@ export default function Stats() {
       {/* Gradient Glow */}
       <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-600/10 blur-3xl" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
+      <div className="relative z-10 max-w-5xl mx-auto px-4">
         {/* Heading */}
         <div className="max-w-3xl mx-auto text-center">
           <span className="inline-flex items-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1 text-sm font-medium text-purple-400">
             Trusted Worldwide
           </span>
 
-          <h2 className="mt-6 text-4xl md:text-5xl font-bold text-white">
+          <h2 className="mt-6 text-3xl md:text-4xl font-bold text-white">
             Empowering Careers,
             <span className="text-purple-400"> Connecting Talent</span>
           </h2>
