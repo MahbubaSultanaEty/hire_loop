@@ -21,7 +21,7 @@ import {
 
 import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
-import GoogleSignInBtn from "@/components/btns/GoogleSignInBtn";
+import GoogleSignInBtn from "@/components/authentication/GoogleSignInBtn";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
