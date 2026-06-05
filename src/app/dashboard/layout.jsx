@@ -3,9 +3,9 @@ import React from 'react';
 
 const Dashboardlayout = ({children}) => {
     return (
-        <div className='mt-20 flex min-h-screen'>
+        <div className='mt-20 flex min-h-screen gap-6'>
             <DashboardSidebar/>
-            <div>{ children}</div>
+            <div className="flex-1 min-w-0">{children}</div>
         </div>
     );
 };

@@ -1,11 +1,16 @@
+import RecruiterDashboard from '@/components/dashboard/RecruiterDashboard';
 import React from 'react';
+export const metadata = {
+  title: "Recruiter Dashboard | HireLoop",
+  description: "Manage your job postings, track applications, and find the best candidates on HireLoop.",
+};
 
-const page = () => {
+const RecruiterDashboardPage = () => {
     return (
         <div>
-            I am the Reqruiter
+           <RecruiterDashboard/>
         </div>
     );
 };
 
-export default page;
+export default RecruiterDashboardPage;
