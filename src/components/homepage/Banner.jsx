@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Search, MapPin, Briefcase, Building2, Users, Star } from "lucide-react";
+import TypewriterComponent from "typewriter-effect";
 
 const stats = [
   { icon: Briefcase, value: "50K", label: "Active Jobs" },
@@ -33,10 +34,18 @@ export default function Banner() {
             🔥 <span><strong className="text-white">98,000+</strong> NEW JOBS THIS MONTH</span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold text-white text-center max-w-2xl leading-tight mb-3">
-            Find Your Dream Job Today
-          </h1>
-
+          {/* typewritter effect */}
+           <div className="text-3xl md:text-5xl font-bold text-white text-center max-w-2xl leading-tight mb-3">
+  <TypewriterComponent
+    options={{
+      strings: ["Find Your Dream Job Today"],
+      autoStart: true,
+      loop: false,
+      delay: 50,
+      deleteSpeed: Infinity,
+    }}
+  />
+</div>
           <p className="text-white/50 text-sm text-center max-w-md mb-6">
             HireLoop connects top talent with world-class companies. Browse thousands of
             curated opportunities and land your next role — faster.

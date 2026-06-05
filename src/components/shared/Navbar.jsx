@@ -12,6 +12,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,6 +29,7 @@ export default function Navbar() {
 console.log(session);
   const handleSignOut = async () => {
     await authClient.signOut();
+    toast("Logged Out");
     router.push("/");
   };
 
