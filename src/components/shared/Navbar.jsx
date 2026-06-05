@@ -29,7 +29,7 @@ export default function Navbar() {
 console.log(session);
   const handleSignOut = async () => {
     await authClient.signOut();
-    toast("Logged Out");
+    toast.success("Logged Out");
     router.push("/");
   };
 
