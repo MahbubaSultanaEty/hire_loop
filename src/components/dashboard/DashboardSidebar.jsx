@@ -28,15 +28,15 @@ export function DashboardSidebar() {
     return (
       
         <>
-            <aside>
-                <div className="hidden lg:block w-64 shrink-0 border-r border-default p-4">
+            <aside className="relative">
+                <div className="hidden fixed lg:block w-64 shrink-0 border-r border-default p-4">
                     {navContent}
                 </div>
             </aside>
-        <Drawer>
-      <Button className="lg:hidden" variant="secondary">
-        <LayoutSideContentLeft />
-        Menu
+        <Drawer className="relative">
+      <Button className="lg:hidden fixed" variant="secondary">
+        <LayoutSideContentLeft  />
+        
       </Button>
       <Drawer.Backdrop>
         <Drawer.Content placement="left">
