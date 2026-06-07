@@ -8,6 +8,8 @@ import {
   FieldError,
   Button,
   InputGroup,
+  Toast,
+  toast,
 } from "@heroui/react";
 import {
   Briefcase,
@@ -20,6 +22,7 @@ import {
   ChevronRight,
   Globe,
 } from "lucide-react";
+import { createJob } from "@/lib/actions/jobs";
 
 const jobCategories = [
   "Engineering", "Design", "Marketing", "Sales", "Finance",
@@ -30,19 +33,62 @@ const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
 const currencies = ["USD", "BDT", "EUR", "GBP", "INR"];
 
 export default function PostJobForm() {
+
+  const [mockCompany] = useState({
+    name: "Acme Industris",
+    id: "company-123",
+    isApproved: true
+  });
+
   const [isRemote, setIsRemote] = useState(false);
   const [jobType, setJobType] = useState("Full-time");
   const [currency, setCurrency] = useState("USD");
   const [category, setCategory] = useState("");
 
+  const handleSubmit = async(e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+
+  const jobData = {
+    title: formData.get("title"),
+    category,
+    type: jobType,
+    currency,
+    salaryMin: formData.get("salaryMin"),
+    salaryMax: formData.get("salaryMax"),
+    deadline: formData.get("deadline"),
+    isRemote,
+    city: isRemote ? null : formData.get("city"),
+    country: isRemote ? null : formData.get("country"),
+    responsibilities: formData.get("responsibilities"),
+    requirements: formData.get("requirements"),
+    benefits: formData.get("benefits"),
+    status: "active",
+  };
+
+    const payload = {
+      ...jobData,
+      status: "active",
+      companyId: mockCompany.id,
+      isPubliclyVisible: true,
+    }
+    const res = await createJob(payload);
+    if (res.insertedId) {
+      toast.success("Job Posted Successfully");
+      e.target.reset();
+      setIsRemote(false)
+}
+};
   return (
-    <div className="w-full px-6 py-10">
+    <div className="max-w-5xl px-6 py-10">
+      <Toast.Provider/>
       <div className="mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-white">Post a New Job</h1>
         <p className="text-white/40 text-sm mt-1">Fill in the details below to publish your job listing.</p>
       </div>
 
-      <Form className="space-y-8">
+      <Form onSubmit={handleSubmit} className="space-y-8">
 
         {/* Section 1 — Job Info */}
         <section className="rounded-2xl border border-purple-500/10 bg-white/[0.03] p-6 space-y-6">
