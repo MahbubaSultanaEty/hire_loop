@@ -16,6 +16,7 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { createCompany } from "@/lib/actions/companies";
 
 const industries = [
   "Technology",
@@ -129,7 +130,7 @@ export default function CompanyForm({
       console.log(companyData);
 
       if (mode === "create") {
-        // POST API
+        await createCompany(companyData);
       } else {
         // PATCH API
       }
