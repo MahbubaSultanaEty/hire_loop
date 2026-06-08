@@ -81,8 +81,9 @@ export default function CompanyForm({
 
     formData.append("image", file);
 
+    const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMAGE_UPLOAD_API;
     const res = await fetch(
-      `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+      `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
       {
         method: "POST",
         body: formData,
