@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-console.log(session);
+// console.log(user);
   const handleSignOut = async () => {
     await authClient.signOut();
     toast.success("Logged Out");

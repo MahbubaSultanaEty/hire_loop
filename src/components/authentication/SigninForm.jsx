@@ -44,7 +44,7 @@ export default function SignInForm() {
         message: "Signed in successfully! Redirecting...",
       });
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push("/");
       }, 1200);
       return;
     }

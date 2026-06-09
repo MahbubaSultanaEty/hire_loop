@@ -42,10 +42,9 @@ const employeeRanges = [
 
 export default function CompanyForm({
   mode = "create",
-  company = null,
+  company = null, recruiter
 }) {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
+ 
 
   const [industry, setIndustry] = useState(
     company?.industry || ""
@@ -116,7 +115,7 @@ export default function CompanyForm({
       }
 
       const companyData = {
-        recruiterId: user?.id,
+        recruiterId: recruiter?.id,
         name: formData.get("name"),
         industry,
         website: formData.get("website"),

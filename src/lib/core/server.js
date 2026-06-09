@@ -1,6 +1,6 @@
 'use server'
 
-const baseUrl = process.env.NEXT_PUBLIC_BETTER_AUTH_URL
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const serverMutation = async (path, data) => {
     const res = await fetch(`${baseUrl}${path}`, {
