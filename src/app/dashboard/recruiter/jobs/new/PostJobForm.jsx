@@ -32,13 +32,10 @@ const jobCategories = [
 const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
 const currencies = ["USD", "BDT", "EUR", "GBP", "INR"];
 
-export default function PostJobForm({company}) {
-console.log("company from postjpb form", company);
-  const [mockCompany] = useState({
-    name: "Acme Industris",
-    id: "company-123",
-    isApproved: true
-  });
+export default function PostJobForm({ company }) {
+  
+// console.log("company from postjpb form", company);
+ 
 
   const [isRemote, setIsRemote] = useState(false);
   const [jobType, setJobType] = useState("Full-time");
@@ -69,8 +66,8 @@ console.log("company from postjpb form", company);
 
     const payload = {
       ...jobData,
-      status: "active",
-      companyId: mockCompany.id,
+      status: company.status,
+      companyId: company.id,
       isPubliclyVisible: true,
     }
     const res = await createJob(payload);

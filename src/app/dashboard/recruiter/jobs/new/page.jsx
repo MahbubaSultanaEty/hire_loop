@@ -4,8 +4,9 @@ import { getLoggedInRecruiterCompany } from '@/lib/api/companies';
 
 const PostJobPage = async() => {
 
-const company= await getLoggedInRecruiterCompany()
-
+const companies= await getLoggedInRecruiterCompany()
+    const company = companies[0]
+    // console.log(company);
     return (
         <div>
             <PostJobForm company={ company} />
