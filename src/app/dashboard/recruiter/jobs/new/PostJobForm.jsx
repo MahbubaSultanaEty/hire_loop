@@ -66,9 +66,11 @@ export default function PostJobForm({ company }) {
 
     const payload = {
       ...jobData,
-      status: company.status,
-      companyId: company.id,
+      status: "active",
+      companyId: company._id,
       isPubliclyVisible: true,
+      companyName: company.name,
+      companyLogo: company.logo
     }
     const res = await createJob(payload);
     if (res.insertedId) {

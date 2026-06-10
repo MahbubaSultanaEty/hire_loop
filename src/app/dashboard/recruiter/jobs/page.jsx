@@ -1,3 +1,4 @@
+import { getLoggedInRecruiterCompany } from "@/lib/api/companies";
 import { getCompanyJobs } from "@/lib/api/jobs";
 import { Chip } from "@heroui/react";
 import { MapPin, Briefcase, Eye, Pencil, Trash2, Plus } from "lucide-react";
@@ -9,8 +10,12 @@ export const metadata = {
 };
 
 const RecruiterJobs = async () => {
-  const companyId = "company-123";
-  const jobs = await getCompanyJobs(companyId);
+  const companies= await getLoggedInRecruiterCompany()
+  const company = companies[0];
+  console.log(company);
+  console.log(company?._id);
+  const jobs = await getCompanyJobs(company._id);
+  console.log(jobs);
 
   return (
     <div className="w-full px-6 py-10">
@@ -38,7 +43,7 @@ const RecruiterJobs = async () => {
             <Briefcase size={40} className="text-white/10 mb-4" />
             <p className="text-white/40 text-sm">No jobs posted yet.</p>
             <Link
-              href="/recruiter/dashboard/jobs/post"
+              href="/dashboard/recruiter/jobs/new"
               className="mt-4 text-purple-400 hover:text-purple-300 text-sm transition-colors"
             >
               Post your first job →
