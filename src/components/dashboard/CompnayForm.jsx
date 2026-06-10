@@ -17,6 +17,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { createCompany } from "@/lib/actions/companies";
+import { updateCompany } from "@/lib/api/companies";
 
 const industries = [
   "Technology",
@@ -41,8 +42,8 @@ const employeeRanges = [
 ];
 
 export default function CompanyForm({
-  mode = "create",
-  company = null, recruiter
+  mode ,
+  company , recruiter
 }) {
  
 
@@ -129,10 +130,10 @@ export default function CompanyForm({
       console.log(companyData);
 
       if (mode === "create") {
-        await createCompany(companyData);
-      } else {
-        // PATCH API
-      }
+  await createCompany(companyData);
+} else {
+  await updateCompany(company._id, companyData);
+}
 
       
       setStatus({

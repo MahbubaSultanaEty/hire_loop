@@ -23,7 +23,7 @@ const RecruiterJobs = async () => {
           </p>
         </div>
         <Link
-          href="/recruiter/dashboard/jobs/post"
+          href="/dashboard/recruiter/jobs/new"
           className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-lg shadow-purple-500/25 transition-all"
         >
           <Plus size={16} />
