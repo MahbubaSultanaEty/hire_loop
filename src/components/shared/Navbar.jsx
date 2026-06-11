@@ -20,7 +20,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Browse Jobs", href: "/" },
-    { name: "Company", href: "/company" },
+    { name: "Companies", href: "/companies" },
     { name: "Pricing", href: "/pricing" },
   ];
 
@@ -73,7 +73,7 @@ export default function Navbar() {
                 {/* Hi + Avatar */}
                 <Link href="/profile" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                   <span className="text-sm text-white/70">
-                    Hi, <span className="text-white font-medium">{user.name?.split(" ")[0]}</span>
+                    Hi, <span className="text-white font-medium">{user.name?.split(" ")[1]}</span>
                   </span>
                   {user.image ? (
                     <Image

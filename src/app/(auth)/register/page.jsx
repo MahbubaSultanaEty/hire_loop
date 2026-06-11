@@ -141,15 +141,14 @@ export default function SignupPage() {
                 <FieldError />
               </TextField>
 
-              <TextField
-                isRequired
+              <TextField                
                 name="image"
                 type="text"
-                validate={(value) =>
-                  value.startsWith("http")
-                    ? null
-                    : "Please enter a valid image URL"
-                }
+                // validate={(value) =>
+                //   value.startsWith("http")
+                //     ? null
+                //     : "Please enter a valid image URL"
+                // }
               >
                 <Label className="text-white/80">Profile Image URL</Label>
                 <Input name="image" placeholder="https://..." />
