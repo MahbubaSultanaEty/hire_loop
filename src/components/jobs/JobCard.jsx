@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function JobCard({ job }) {
   return (
     <Link href={`/jobs/${job._id}`}>
-      <Card.Root variant="outlined" className="bg-white/[0.03] border-purple-500/10 hover:bg-white/[0.06] hover:border-purple-500/20 transition-all cursor-pointer">
+      <Card className="bg-white/[0.03] border-purple-500/10 hover:bg-white/[0.06] hover:border-purple-500/20 transition-all cursor-pointer h-full">
         <Card.Header className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center overflow-hidden shrink-0">
             {job.companyLogo ? (
@@ -31,8 +31,8 @@ export default function JobCard({ job }) {
           </Chip>
         </Card.Header>
 
-        <Card.Body className="pt-0">
-          <div className="flex flex-wrap gap-2 mb-4">
+        <Card.Content className="pt-0 space-y-4">
+          <div className="flex flex-wrap gap-2">
             <span className="text-xs px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">
               {job.type}
             </span>
@@ -60,8 +60,8 @@ export default function JobCard({ job }) {
               <span>Deadline: {new Date(job.deadline).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
             </div>
           </div>
-        </Card.Body>
-      </Card.Root>
+        </Card.Content>
+      </Card>
     </Link>
   );
 }
