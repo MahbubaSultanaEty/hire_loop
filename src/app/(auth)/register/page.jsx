@@ -16,6 +16,9 @@ import { BriefcaseBusiness, ArrowRight, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
 import GoogleSignInBtn from "@/components/authentication/GoogleSignInBtn";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +27,10 @@ export default function SignupPage() {
     type: "", // success | error
     message: "",
   });
+
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+  const router = useRouter();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +55,7 @@ export default function SignupPage() {
       });
 
       setTimeout(() => {
-        window.location.href = "/";
+        router.push(redirectTo)
       }, 1200);
 
       return;
@@ -261,6 +268,13 @@ export default function SignupPage() {
                 </span>
               </div>
             </div>
+
+            <p className="text-center text-xs text-white/30 m-3">
+                        Already have an account?{" "}
+                        <Link href={`/signin?redirect=${redirectTo}`} className="text-purple-400 hover:text-purple-300 transition-colors">
+                          sign in 
+                        </Link> instead
+                      </p>
 
             <GoogleSignInBtn />
           </div>

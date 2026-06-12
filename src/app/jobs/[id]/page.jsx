@@ -176,7 +176,7 @@ const JobDetailsPage = async ({ params }) => {
                     Apply for this Job
                                   </Button>                       
                               </Link>
-                              {!user && <p className="text-xs text-center p-3">Plaese <Link href="/login" className="text-purple-400 font-medium">Login</Link> to apply for jobs</p>}
+                              {!user && <p className="text-xs text-center p-3">Plaese <Link href="/signin" className="text-purple-400 font-medium">Sign in</Link> to apply for jobs</p>}
               </Card.Content>
             </Card>
 

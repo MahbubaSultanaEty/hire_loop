@@ -73,7 +73,7 @@ export default function Navbar() {
                 {/* Hi + Avatar */}
                 <Link href="/profile" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                   <span className="text-sm text-white/70">
-                    Hi, <span className="text-white font-medium">{user.name?.split(" ")[1]}</span>
+                    Hi, <span className="text-white font-medium">{user.name?.split(" ")[0]}</span>
                   </span>
                   {user.image ? (
                     <Image
@@ -102,7 +102,7 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center gap-3 ml-4">
                 <Link
-                  href="/login"
+                  href="/signin"
                   className="border border-white bg-purple-500/5 text-purple-300 hover:bg-purple-500/10 hover:text-purple-200 transition-all px-4 py-2 rounded-xl"
                 >
                   Sign In
@@ -195,7 +195,7 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link
-                    href="/login"
+                    href="/signin"
                     className="border border-white bg-purple-500/5 text-purple-300 text-center px-4 py-2 rounded-xl"
                   >
                     Sign In

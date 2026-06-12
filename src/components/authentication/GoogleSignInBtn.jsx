@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function GoogleSignInBtn() {
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const handleSignin = async () => {
     setLoading(true);
 
     await authClient.signIn.social({
@@ -20,7 +20,7 @@ export default function GoogleSignInBtn() {
 
   return (
     <Button
-      onClick={handleLogin}
+      onClick={handleSignin}
       disabled={loading}
       className="
         w-full

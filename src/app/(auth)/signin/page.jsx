@@ -3,6 +3,7 @@ import { BriefcaseBusiness } from "lucide-react";
 import Link from "next/link";
 
 
+
 export const metadata = {
   title: "Sign In | HireLoop",
   description: "Sign in to your HireLoop account.",
@@ -30,12 +31,7 @@ export default function SignInPage() {
 
           <SignInForm/>
 
-          <p className="text-center text-xs text-white/30 mt-6">
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-purple-400 hover:text-purple-300 transition-colors">
-              Get Started
-            </Link>
-          </p>
+          
         </div>
       </div>
     </main>
