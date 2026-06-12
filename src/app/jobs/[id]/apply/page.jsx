@@ -24,7 +24,7 @@ const ApplyPage = async ({ params }) => {
     const job = await getJobById(id);
    return (
         <div>
-            <JobApply job={job}></JobApply>
+           <JobApply applicant={user} job={job}></JobApply>
         </div>
     );
 };
