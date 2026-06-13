@@ -7,6 +7,7 @@ import {
 import { Building2, FileText, Globe, Send, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { submitApplication } from "@/lib/actions/applications";
+import toast from "react-hot-toast";
 
 export default function JobApply({ job, applicant }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +24,8 @@ export default function JobApply({ job, applicant }) {
       jobId: job?._id,
       applicantId: applicant?.id,
       applicantName: applicant?.name,
-      applicantEmail: applicant?.email,
+        applicantEmail: applicant?.email,
+      companyName: job?.companyName,
       resumeLink: formData.get("resumeLink"),
       portfolioLink: formData.get("portfolioLink"),
       coverNote: formData.get("coverNote"),
@@ -34,12 +36,16 @@ export default function JobApply({ job, applicant }) {
     try {
       console.log(applicationData);
       // TODO: POST /api/applications
-        const res= await submitApplication(applicationData)
-      setStatus({ type: "success", message: "Application submitted successfully!" });
+        await submitApplication(applicationData);
+        toast('Application submitted successfully!')
+        setStatus({ type: "success", message: "Application submitted successfully!" });
+        
     } catch {
+        toast("Something went wrong. Please try again.")
       setStatus({ type: "error", message: "Something went wrong. Please try again." });
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
+        window.location.reload()
     }
   };
 
