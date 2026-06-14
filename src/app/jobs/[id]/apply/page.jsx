@@ -35,7 +35,7 @@ const ApplyPage = async ({ params }) => {
            <h2 className='font-bold justify-center h-[25vh] flex items-end text-lg'>You have applied so far for {applications.length} out of 3 jobs</h2>
            
            {
-               applications.length> plan.maxApplicationPerMonth ? <JobApply applicant={user} job={job}></JobApply>: <p className='h-50vh flex items-center justify-center bg-black/60  mx-20 my-4 p-8 rounded-b-xl shadow-fuchsia-950 shadow-2xs  '>Purchase plan to apply for more jobs. <Link className='text-fuchsia-500 font-bold' href="/plans">Plans</Link></p>} 
+               applications.length> plan.maxApplicationPerMonth ? <JobApply applicant={user} job={job}></JobApply>: <p className='h-50vh flex items-center justify-center gap-4 bg-black/60  mx-20 my-4 p-8 rounded-b-xl shadow-fuchsia-950 shadow-2xs  '>Purchase plan to apply for more jobs. <Link className='text-fuchsia-500 font-bold' href="/plans">Plans</Link></p>} 
         </div>
     );
 };
