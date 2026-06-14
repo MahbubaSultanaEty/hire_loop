@@ -173,17 +173,18 @@ function PlanCard({ plan, icon: Icon }) {
       </Card.Content>
 
       <Card.Footer>
-        <Link href={plan.href} className="w-full">
-          <Button
-            className={`w-full font-medium rounded-xl transition-all ${
+            <form className=" w-full " action="/api/checkout_sessions" method="POST">
+      <section>
+        <button type="submit" role="link"  className={`w-full p-2 font-medium rounded-xl transition-all ${
               plan.highlighted
                 ? "bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-500/25"
                 : "bg-white/5 hover:bg-white/10 text-white/70 border border-white/10"
-            }`}
-          >
-            {plan.cta}
-          </Button>
-        </Link>
+            }`}>
+          Checkout
+        </button>
+      </section>
+    </form>
+       
       </Card.Footer>
     </Card>
   );
