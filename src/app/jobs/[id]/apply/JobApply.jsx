@@ -50,7 +50,7 @@ export default function JobApply({ job, applicant }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F1117] px-6 py-10 mt-20">
+    <div className="min-h-screen bg-[#0F1117] px-6 py-10 ">
       <div className="max-w-2xl mx-auto space-y-6">
 
         {/* Job Summary */}

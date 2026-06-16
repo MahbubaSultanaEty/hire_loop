@@ -16,6 +16,7 @@ import Link from "next/link";
 const seekerPlans = [
   {
     name: "Free",
+    id: "seeker_free",
     price: "$0",
     period: "",
     badge: null,
@@ -67,6 +68,7 @@ const seekerPlans = [
 const recruiterPlans = [
   {
     name: "Free",
+    id: 'recruiter_free',
     price: "$0",
     period: "",
     badge: null,

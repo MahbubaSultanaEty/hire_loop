@@ -37,13 +37,14 @@ export default function SignupPage() {
 
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
-
+    const plan = role === 'seeker' ? 'seeker_free' : 'recruiter_free';
     const { data, error } = await authClient.signUp.email({
       email: user.email,
       name: user.name,
       image: user.image,
       password: user.password,
-      role
+      role,
+      plan
     });
 
     console.log(data, error);
