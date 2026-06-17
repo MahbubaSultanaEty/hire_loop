@@ -18,15 +18,28 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
-  const navLinks = [
+
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+   const navLinks = [
     { name: "Browse Jobs", href: "/jobs" },
     { name: "Companies", href: "/companies" },
     { name: "Pricing", href: "/plans" },
   ];
 
-  const { data: session, isPending } = authClient.useSession();
-  const user = session?.user;
-// console.log(user);
+  const dashboardLinks = {
+    seeker: "/dashboard/seeker",
+    recruiter: "/dashboard/recruiter"
+  }
+
+  if (user?.email) {
+    navLinks.push({
+      name: "Dashboard",
+      href: dashboardLinks[user?.role || "seeker"]
+   })
+ }
+
   const handleSignOut = async () => {
     await authClient.signOut();
     toast.success("Logged Out");
