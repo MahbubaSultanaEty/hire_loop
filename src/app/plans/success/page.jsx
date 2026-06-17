@@ -2,7 +2,8 @@ import { stripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
 import { CheckCircle2, Mail } from 'lucide-react'
 import { Card, Button } from '@heroui/react'
-import Link from 'next/link'
+import Link from 'next/link';
+import { createSubscription } from '@/lib/actions/subscriptions'
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams
@@ -23,6 +24,12 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === 'complete') {
+    const subsInfo = {
+      email: customerEmail,
+      planId: metadata.planId,
+    }
+    // update the user about the new plan 
+    const result = await createSubscription(subsInfo)
     return (
       <div className="min-h-screen bg-[#0F1117] flex items-center justify-center px-6">
         <div className="w-full max-w-md">
