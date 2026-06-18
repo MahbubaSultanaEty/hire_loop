@@ -23,6 +23,7 @@ export default function JobApply({ job, applicant }) {
     const applicationData = {
       jobId: job?._id,
       applicantId: applicant?.id,
+      jobTitle: job.title,
       applicantName: applicant?.name,
         applicantEmail: applicant?.email,
       companyName: job?.companyName,
