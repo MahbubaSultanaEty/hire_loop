@@ -2,7 +2,7 @@
 import { getUserSession } from "@/lib/core/session";
 import {Bars, Bell, Bookmark, Box, Briefcase, Envelope, FileText, Gear, House, LayoutSideContentLeft, Magnifier, Person, PlusShape} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
-import { Building, Handshake, Plus } from "lucide-react";
+import { Building, Check, Circle, CircleArrowDown, CircleArrowRight, Handshake, HandshakeIcon, LayoutGrid, Plus, Users } from "lucide-react";
 import Link from "next/link";
 
 export async function DashboardSidebar() {
@@ -44,10 +44,46 @@ export async function DashboardSidebar() {
     href: "/dashboard/seeker/billing", 
     label: "Billing"
   }
+  ];
+
+  const adminNavItems = [
+  {
+    icon: LayoutGrid, 
+    href: "/dashboard/admin", 
+    label: "Dashboard"
+  },
+  {
+    icon: Users, 
+    href: "/dashboard/admin/users", 
+    label: "Users"
+  },
+  {
+    icon: Building,
+    href: "/dashboard/admin/companies", 
+    label: "Companies"
+  },
+  {
+    icon: Briefcase, // Jobs আইকনের জন্য (ব্যাগ আকৃতির আইকন)
+    href: "/dashboard/admin/jobs", 
+    label: "Jobs"
+  },
+  {
+    icon: HandshakeIcon, 
+    href: "/dashboard/admin/payments", 
+    label: "Payments"
+  },
+  {
+    icon: Gear, 
+    href: "/dashboard/admin/settings", 
+    label: "Settings"
+  }
 ];
+  
+
   const navLinksMap = {
     seeker: jobSeekerNavItems,
-    recruiter: recruiterNavLinks
+    recruiter: recruiterNavLinks,
+    admin: adminNavItems
   }
   const navItems = navLinksMap[user?.role || "seeker"];
     
@@ -83,7 +119,12 @@ export async function DashboardSidebar() {
           <Drawer.Dialog>
             <Drawer.CloseTrigger />
             <Drawer.Header>
-              <Drawer.Heading className="mt-22">Navigation</Drawer.Heading>
+                  <Drawer.Heading className="mt-22">
+                    <div className="bg-black/60 rounded-2xl p-2 px-8">
+                      <p> {user?.name}</p>
+                      <p className="text-xs flex gap-2 items-center"> <CircleArrowDown size="12"/>{ user?.role} console</p>
+                    </div>
+                   </Drawer.Heading>
             </Drawer.Header>
             <Drawer.Body>
              {navContent}
