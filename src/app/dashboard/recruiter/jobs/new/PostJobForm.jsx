@@ -87,7 +87,46 @@ export default function PostJobForm({ company }) {
         <p className="text-white/40 text-sm mt-1">Fill in the details below to publish your job listing.</p>
       </div>
 
-      <Form onSubmit={handleSubmit} className="space-y-8">
+       {/* Section 3 — Company */}
+        <section className="rounded-2xl border border-purple-500/10 bg-white/[0.03] my-2 p-6 space-y-4">
+          <div>
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Building2 size={18} className="text-purple-400" />
+              Company
+            </h2>
+            <p className="text-white/40 text-xs mt-1">Auto-filled from your registered company.</p>
+          </div>
+
+          <div className="flex items-center gap-4 p-4 rounded-xl border border-purple-500/10 bg-white/[0.02]">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
+              <Building2 size={18} className="text-purple-400" />
+            </div>
+            <div>
+              <p className="text-white text-sm font-medium">Your Company Name</p>
+              <p className="text-white/30 text-xs">Plan: Growth · 4 of 10 active jobs used</p>
+            </div>
+            <div className="ml-auto flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-green-400" />
+              <span className="text-green-400 text-xs">{ company.status}</span>
+            </div>
+          </div>
+        </section>
+
+      {company?.status !== "approved" && (
+  <div className="mb-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
+    <h3 className="text-amber-400 font-semibold text-lg">
+      Company Approval Pending
+    </h3>
+
+    <p className="text-white/60 text-sm mt-2">
+      Your company profile is currently under review. You can update your
+      company information, but you won&apos;t be able to create or publish job
+      posts until your company is approved by an administrator.
+    </p>
+  </div>
+)}
+
+    {company?.status === "approved"  && <Form onSubmit={handleSubmit} className="space-y-8">
 
         {/* Section 1 — Job Info */}
         <section className="rounded-2xl border border-purple-500/10 bg-white/[0.03] p-6 space-y-6">
@@ -293,32 +332,7 @@ export default function PostJobForm({ company }) {
               />
             </div>
           </div>
-        </section>
-
-        {/* Section 3 — Company */}
-        <section className="rounded-2xl border border-purple-500/10 bg-white/[0.03] p-6 space-y-4">
-          <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              <Building2 size={18} className="text-purple-400" />
-              Company
-            </h2>
-            <p className="text-white/40 text-xs mt-1">Auto-filled from your registered company.</p>
-          </div>
-
-          <div className="flex items-center gap-4 p-4 rounded-xl border border-purple-500/10 bg-white/[0.02]">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
-              <Building2 size={18} className="text-purple-400" />
-            </div>
-            <div>
-              <p className="text-white text-sm font-medium">Your Company Name</p>
-              <p className="text-white/30 text-xs">Plan: Growth · 4 of 10 active jobs used</p>
-            </div>
-            <div className="ml-auto flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-green-400" />
-              <span className="text-green-400 text-xs">Approved</span>
-            </div>
-          </div>
-        </section>
+        </section>    
 
         {/* Submit */}
         <div className="flex justify-end">
@@ -331,7 +345,7 @@ export default function PostJobForm({ company }) {
           </Button>
         </div>
 
-      </Form>
+      </Form>}
     </div>
   );
 }

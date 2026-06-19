@@ -13,9 +13,10 @@ import {
   Label,
   Input,
   FieldError,
+  toast,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { createCompany } from "@/lib/actions/companies";
 import { updateCompany } from "@/lib/api/companies";
 
@@ -96,63 +97,91 @@ export default function CompanyForm({
     return data.data.url;
   };
 
+  const router = useRouter()
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    setIsLoading(true);
+  setIsLoading(true);
+
+  setStatus({
+    type: "",
+    message: "",
+  });
+
+  const formData = new FormData(e.currentTarget);
+
+  try {
+    let logoUrl = logoPreview;
+
+    if (logoFile) {
+      logoUrl = await uploadToImgbb(logoFile);
+    }
+
+    const companyData = {
+      recruiterId: recruiter?.id,
+      name: formData.get("name"),
+      industry,
+      website: formData.get("website"),
+      location: formData.get("location"),
+      employeeRange,
+      logo: logoUrl,
+      description: formData.get("description"),
+      status: company?.status || "pending",
+    };
+
+   if (mode === "create") {
+  const payload = await createCompany(companyData);
+
+  if (payload?.insertedId) {
+    const newCompany = {
+      ...companyData,
+      _id: payload.insertedId,
+    };
+
+    console.log(newCompany);
+
+    toast.success("Company profile created successfully!");
 
     setStatus({
-      type: "",
-      message: "",
+      type: "success",
+      message: "Company registered successfully!",
     });
-
-    const formData = new FormData(e.currentTarget);
-
-    try {
-      let logoUrl = logoPreview;
-
-      if (logoFile) {
-        logoUrl = await uploadToImgbb(logoFile);
-      }
-
-      const companyData = {
-        recruiterId: recruiter?.id,
-        name: formData.get("name"),
-        industry,
-        website: formData.get("website"),
-        location: formData.get("location"),
-        employeeRange,
-        logo: logoUrl,
-        description: formData.get("description"),
-        status: "pending",
-      };
-
-      console.log(companyData);
-
-      if (mode === "create") {
-  await createCompany(companyData);
+  }
 } else {
-  await updateCompany(company._id, companyData);
-}
+      const payload = await updateCompany(
+        company._id,
+        companyData
+      );
 
-      
-      setStatus({
-        type: "success",
-        message:
-          mode === "create"
-            ? "Company registered successfully!"
-            : "Company updated successfully!",
-      });
-    } catch (error) {
-      setStatus({
-        type: "error",
-        message: "Something went wrong. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
-      redirect("/dashboard/recruiter/company")
+     if (payload?.modifiedCount > 0) {
+        const savedCompany = {
+      ...companyData,
+      _id: payload.insertedId,
+    };
+    console.log(savedCompany);      
+        toast.success("Company updated successfully!");
+
+        setStatus({
+          type: "success",
+          message: "Company updated successfully!",
+        });
+      }
     }
-  };
+  } catch (error) {
+    console.error(error);
+
+    toast.error("Something went wrong. Please try again.");
+
+    setStatus({
+      type: "error",
+      message: "Something went wrong. Please try again.",
+    });
+  } finally {
+    setIsLoading(false);
+
+   router.push("/dashboard/recruiter/company");
+  }
+};
 
   return (
     <div className="w-full max-w-4xl mx-auto px-6 py-10">
