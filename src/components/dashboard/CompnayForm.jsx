@@ -119,6 +119,7 @@ export default function CompanyForm({
 
     const companyData = {
       recruiterId: recruiter?.id,
+      recruiterEmail: recruiter?.email,
       name: formData.get("name"),
       industry,
       website: formData.get("website"),
