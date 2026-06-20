@@ -1,10 +1,11 @@
-// components/admin/CompanyTable.jsx
 "use client";
 
 import { useState } from "react";
 import { Table, Chip, Button } from "@heroui/react";
 import { Building2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation"; 
+import { updateCompanyStatus } from "@/lib/actions/companies";
 
 const statusConfig = {
   pending: { label: "Pending", class: "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20" },
@@ -14,12 +15,21 @@ const statusConfig = {
 
 export default function CompanyTable({ companies = [], user }) {
   const [loadingId, setLoadingId] = useState(null);
-
+  const router = useRouter(); 
   const handleAction = async (id, action) => {
-    setLoadingId(`${id}-${action}`);
-    // TODO: PATCH /api/companies/:id { status: action }
-    console.log(id, action);
-    setLoadingId(null);
+    setLoadingId(`${id}-${action}`); // লোডিং স্টেট চালু
+    try {
+      // এপিআই-তে পুরো অবজেক্ট না পাঠিয়ে শুধু পরিবর্তিত স্ট্যাটাস টুকু পাঠাচ্ছি
+      const result = await updateCompanyStatus(id, { status: action });
+      console.log(`${action} company result:`, result);
+      
+      
+      router.refresh(); 
+    } catch (error) {
+      console.error(`Failed to ${action} company:`, error);
+    } finally {
+      setLoadingId(null); 
+    }
   };
 
   return (
@@ -27,7 +37,7 @@ export default function CompanyTable({ companies = [], user }) {
       <Table.ScrollContainer>
         <Table.Content aria-label="Company Registrations">
           <Table.Header>
-            <Table.Column>Company Name</Table.Column>
+            <Table.Column isRowHeader>Company Name</Table.Column>
             <Table.Column>Recruiter Email</Table.Column>
             <Table.Column>Industry</Table.Column>
             <Table.Column>Status</Table.Column>
@@ -83,21 +93,24 @@ export default function CompanyTable({ companies = [], user }) {
                 {/* Actions */}
                 <Table.Cell>
                   <div className="flex items-center gap-2">
-                    {company.status !== "approved" && (
+                    {company.status?.toLowerCase() !== "approved" && (
                       <Button
                         size="sm"
-                        isDisabled={loadingId === `${company._id}-approved`}
-                        onPress={() => handleAction(company._id, "approved")}
+                        
+                        isLoading={loadingId === `${company._id}-approved`} 
+                        isDisabled={loadingId !== null}
+                        onClick={() => handleAction(company._id, "approved")}
                         className="bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-xs px-3 rounded-lg"
                       >
                         Approve
                       </Button>
                     )}
-                    {company.status !== "rejected" && (
+                    {company.status?.toLowerCase() !== "rejected" && (
                       <Button
                         size="sm"
-                        isDisabled={loadingId === `${company._id}-rejected`}
-                        onPress={() => handleAction(company._id, "rejected")}
+                        isLoading={loadingId === `${company._id}-rejected`}
+                        isDisabled={loadingId !== null}
+                        onClick={() => handleAction(company._id, "rejected")}
                         className="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs px-3 rounded-lg"
                       >
                         Reject
