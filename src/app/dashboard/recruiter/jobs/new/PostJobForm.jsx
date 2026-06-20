@@ -24,6 +24,19 @@ import {
 } from "lucide-react";
 import { createJob } from "@/lib/actions/jobs";
 
+
+const companyStatusConfig = {
+  pending: { label: "Pending", class: " text-yellow-400 " },
+  approved: { label: "Approved", class: " text-green-400  " },
+  rejected: { label: "Rejected", class: " text-red-400  " },
+};
+
+const dotConfig = {
+  pending: "bg-yellow-500",
+  approved: "bg-green-500",
+  rejected: "bg-red-500",
+};
+
 const jobCategories = [
   "Engineering", "Design", "Marketing", "Sales", "Finance",
   "HR", "Operations", "Product", "Data", "Customer Support",
@@ -34,6 +47,8 @@ const currencies = ["USD", "BDT", "EUR", "GBP", "INR"];
 
 export default function PostJobForm({ company }) {
   
+  // একদম ক্লিন কোড, কোনো ডিফল্ট ক্লাসের ঝামেলা নেই
+const currentDotClass = `w-2 h-2 rounded-full shrink-0 ${dotConfig[company?.status]}`;
 // console.log("company from postjpb form", company);
  
 
@@ -102,12 +117,12 @@ export default function PostJobForm({ company }) {
               <Building2 size={18} className="text-purple-400" />
             </div>
             <div>
-              <p className="text-white text-sm font-medium">Your Company Name</p>
+            <p className="text-white text-sm font-medium">{ company?.name}</p>
               <p className="text-white/30 text-xs">Plan: Growth · 4 of 10 active jobs used</p>
             </div>
             <div className="ml-auto flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-green-400" />
-              <span className="text-green-400 text-xs">{ company.status}</span>
+            <div className={ currentDotClass} />
+              <span className={companyStatusConfig[company.status]?.class}>{ company.status}</span>
             </div>
           </div>
         </section>

@@ -7,13 +7,15 @@ import Image from "next/image";
 import { useRouter } from "next/navigation"; 
 import { updateCompanyStatus } from "@/lib/actions/companies";
 
+
 const statusConfig = {
   pending: { label: "Pending", class: "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20" },
   approved: { label: "Approved", class: "bg-green-500/10 text-green-400 border border-green-500/20" },
   rejected: { label: "Rejected", class: "bg-red-500/10 text-red-400 border border-red-500/20" },
 };
 
-export default function CompanyTable({ companies = [], user }) {
+export default function CompanyTable({ companies = [], user}) {
+ 
   const [loadingId, setLoadingId] = useState(null);
   const router = useRouter(); 
   const handleAction = async (id, action) => {
@@ -38,7 +40,7 @@ export default function CompanyTable({ companies = [], user }) {
         <Table.Content aria-label="Company Registrations">
           <Table.Header>
             <Table.Column isRowHeader>Company Name</Table.Column>
-            <Table.Column>Recruiter Email</Table.Column>
+            <Table.Column>Recruiter Email</Table.Column>            
             <Table.Column>Industry</Table.Column>
             <Table.Column>Status</Table.Column>
             <Table.Column>Date Submitted</Table.Column>
@@ -68,6 +70,7 @@ export default function CompanyTable({ companies = [], user }) {
                 <Table.Cell>
                   <span className="text-white/50 text-sm">{company.recruiterEmail || "—"}</span>
                 </Table.Cell>
+
 
                 {/* Industry */}
                 <Table.Cell>

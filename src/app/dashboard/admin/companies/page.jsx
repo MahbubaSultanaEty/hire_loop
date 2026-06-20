@@ -1,6 +1,7 @@
 // app/dashboard/admin/companies/page.jsx
 import CompanyTable from '@/components/dashboard/CompaniesTable';
 import { getCompanies } from '@/lib/api/companies';
+import { getCompanyJobs } from '@/lib/api/jobs';
 import { getUserSession } from '@/lib/core/session';
 import { Card, Chip } from '@heroui/react';
 import { Building2, CheckCircle2, XCircle, Clock } from 'lucide-react';
@@ -12,8 +13,8 @@ export const metadata = {
 
 export default async function AdminCompaniesPage() {
     const companies = await getCompanies();
-    const user= await getUserSession()
-
+  const user = await getUserSession();
+  
   const pending = companies.filter((c) => c.status === "pending").length;
   const approved = companies.filter((c) => c.status === "approved").length;
   const rejected = companies.filter((c) => c.status === "rejected").length;
