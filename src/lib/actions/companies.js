@@ -6,6 +6,10 @@ export const createCompany = async (newCompanyData) => {
     return serverMutation('/api/companies', newCompanyData)
 }
 
-export const updateCompanyStatus = async (id, data) => {
-    return serverMutation(`/api/my/companies/${id}`, data, "PATCH")
-}
+export const updateCompanyStatus = async (id, status) => {
+  return serverMutation(
+    `/api/companies/${id}/status`,
+    { status },
+    "PATCH"
+  );
+};

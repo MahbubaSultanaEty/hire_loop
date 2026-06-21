@@ -22,7 +22,7 @@ export default function CompanyTable({ companies = [], user}) {
     setLoadingId(`${id}-${action}`); // লোডিং স্টেট চালু
     try {
       // এপিআই-তে পুরো অবজেক্ট না পাঠিয়ে শুধু পরিবর্তিত স্ট্যাটাস টুকু পাঠাচ্ছি
-      const result = await updateCompanyStatus(id, { status: action });
+      const result = await updateCompanyStatus(id, action);
       console.log(`${action} company result:`, result);
       
       
