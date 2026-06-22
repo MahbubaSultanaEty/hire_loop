@@ -53,6 +53,7 @@ export default function Navbar() {
         <header className="h-16 px-6 flex items-center justify-between rounded-2xl border border-purple-500/10 bg-black/40 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
 
           {/* Logo */}
+          <Link href="/">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-cyan-500 shadow-lg shadow-purple-500/30">
               <BriefcaseBusiness size={20} className="text-white" />
@@ -61,7 +62,8 @@ export default function Navbar() {
               <span className="text-white">Hire</span>
               <span className="text-purple-400">Loop</span>
             </h2>
-          </div>
+            </div>
+            </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8 ml-auto">
