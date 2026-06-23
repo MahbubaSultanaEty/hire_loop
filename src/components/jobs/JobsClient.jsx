@@ -7,8 +7,8 @@ import JobFilter from "./JobFilter";
 import { useRouter } from "next/navigation";
 import { Pagination } from "@heroui/react";
 
-export default function JobsClient({ jobs = [], initialFilters }) {
-  const [page, setPage] = useState(1)
+export default function JobsClient({ jobs = [], initialFilters, total }) {
+  
   
 const [filters, setFilters] = useState({
   search: initialFilters.search || "",
@@ -22,16 +22,36 @@ const [filters, setFilters] = useState({
   
   const router = useRouter();
 
-    const totalItems = jobs.length;
+const handlePageChange = (newPage) => {
+  const updated = { ...filters, page: newPage };
+  setFilters(updated);
+};
+
+    const totalItems = total;
   const itemsPerPage = 9;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const getPageNumbers = () => {
-    const pages = [1, 2, 3, 4];
+
+   const getPageNumbers = () => {
+    const pages = [];
+    pages.push(1);
+    if (filters.page > 3) {
+      pages.push("ellipsis");
+    }
+    const start = Math.max(2, filters.page - 1);
+    const end = Math.min(totalPages - 1, filters.page + 1);
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    if (filters.page < totalPages - 2) {
+      pages.push("ellipsis");
+    }
+    pages.push(totalPages);
     return pages;
- }
+  };
+
   
-    const startItem = 1;
-  const endItem =totalItems;
+const startItem = (filters.page - 1) * itemsPerPage + 1;
+const endItem = Math.min(filters.page * itemsPerPage, totalItems);
 
 
   useEffect(() => {
@@ -52,13 +72,12 @@ if (filters.type) {
       sp.set("salary", filters.salary)
     }
 
-    if (page) {
-       sp.set("page", filters.page)
-    }
+    sp.set("page", filters.page);
     // console.log("serach params", sp.toString());
     const path = `?${sp.toString()}`;
-    router.push(path)
-  }, [router,filters.search, filters.type , filters.category, filters.isRemote, filters.salary])
+    router.push(path);
+  
+  }, [router,filters.search, filters.type , filters.category, filters.isRemote, filters.salary, filters.page])
 
 // const filtered = useMemo(() => {
 //   return jobs.filter((job) => {
@@ -94,7 +113,13 @@ if (filters.type) {
 
         {/* Filter */}
         <div className="mb-6">
-          <JobFilter onFilterChange={setFilters} filters={filters} />
+          <JobFilter  onFilterChange={(newFilters) =>
+    setFilters(prev => ({
+      ...prev,
+      ...newFilters,
+      page: 1
+    }))
+  }filters={filters} />
         </div>
 
         {/* Jobs Grid */}
@@ -119,7 +144,10 @@ if (filters.type) {
       </Pagination.Summary>
       <Pagination.Content>
         <Pagination.Item>
-          <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
+          <Pagination.Previous isDisabled={filters.page === 1} onPress={() => setFilters(prev => ({
+  ...prev,
+  page: prev.page - 1
+}))}>
             <Pagination.PreviousIcon />
             <span>Previous</span>
           </Pagination.Previous>
@@ -131,14 +159,20 @@ if (filters.type) {
             </Pagination.Item>
           ) : (
             <Pagination.Item key={p}>
-              <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
-                {p}
-              </Pagination.Link>
+             <Pagination.Link
+  isActive={p === filters.page}
+  onPress={() => handlePageChange(p)}
+>
+  {p}
+</Pagination.Link>
             </Pagination.Item>
           ),
         )}
         <Pagination.Item>
-          <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
+          <Pagination.Next isDisabled={filters.page === totalPages} onPress={() => setFilters(prev => ({
+  ...prev,
+  page: prev.page + 1
+}))}>
             <span>Next</span>
             <Pagination.NextIcon />
           </Pagination.Next>

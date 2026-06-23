@@ -1,5 +1,6 @@
 import JobsClient from "@/components/jobs/JobsClient";
 import { getJobs } from "@/lib/api/jobs";
+import { CloudGear } from "@gravity-ui/icons";
 
 
 export const metadata = {
@@ -36,7 +37,8 @@ export default async function JobsPage({ searchParams }) {
   page: Number(sp.page) || 1,
   };
     console.log("query",query.toString())
-  const jobs = await getJobs(query.toString());
+  const { jobs, total } = await getJobs(query.toString());
+  console.log(jobs, total);
 
-  return <JobsClient jobs={jobs} initialFilters={filters} />;
+  return <JobsClient jobs={jobs} total={total} initialFilters={filters} />;
 }
