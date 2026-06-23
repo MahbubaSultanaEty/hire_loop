@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -12,7 +11,7 @@ const nextConfig = {
   },
 
   reactCompiler: true,
-   serverExternalPackages: ["@better-auth/kysely-adapter"],
+  serverExternalPackages: ["@better-auth/kysely-adapter", "kysely"],
 };
 
 export default nextConfig;

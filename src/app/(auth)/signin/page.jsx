@@ -1,8 +1,6 @@
+import { Suspense } from "react";
 import SignInForm from "@/components/authentication/SigninForm";
 import { BriefcaseBusiness } from "lucide-react";
-import Link from "next/link";
-
-
 
 export const metadata = {
   title: "Sign In | HireLoop",
@@ -29,8 +27,16 @@ export default function SignInPage() {
             <p className="text-sm text-white/40 mt-1">Sign in to continue to HireLoop</p>
           </div>
 
-          <SignInForm/>
-
+          {/* এখানে Suspense বাউন্ডারি দেওয়া হলো */}
+          <Suspense 
+            fallback={
+              <div className="text-sm text-white/40 text-center py-4">
+                Loading Form...
+              </div>
+            }
+          >
+            <SignInForm />
+          </Suspense>
           
         </div>
       </div>

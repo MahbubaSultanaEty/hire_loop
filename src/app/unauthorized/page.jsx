@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ShieldX, ArrowLeft } from "lucide-react";
-import { Button } from "@heroui/react";
 
+// সার্ভার কম্পোনেন্ট হওয়ায় এই মেটাডেটা এখন পারফেক্টলি কাজ করবে
 export const metadata = {
   title: "Unauthorized | HireLoop",
   description: "You do not have permission to access this page.",
@@ -12,6 +12,7 @@ export default function UnauthorizedPage() {
     <div className="min-h-screen bg-[#0F1117] flex items-center justify-center px-6 pt-22">
       <div className="max-w-lg w-full text-center">
 
+        {/* আইকন বক্স */}
         <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-red-500/10 border border-red-500/20">
           <ShieldX className="h-10 w-10 text-red-400" />
         </div>
@@ -26,6 +27,7 @@ export default function UnauthorizedPage() {
           This area is restricted to users with a different role.
         </p>
 
+        {/* কারণসমূহের লিস্ট */}
         <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 text-left mb-8">
           <h3 className="text-white font-medium mb-3">
             Possible reasons:
@@ -39,24 +41,26 @@ export default function UnauthorizedPage() {
           </ul>
         </div>
 
+        {/* বাটন সেকশন (Tailwind দিয়ে কাস্টমাইজড) */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link href="/">
-            <Button
-              className="bg-purple-600 hover:bg-purple-500 text-white"
-              startContent={<ArrowLeft size={16} />}
-            >
-              Back to Home
-            </Button>
+          
+          {/* Back to Home Button */}
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 text-white font-medium h-10 px-4 rounded-xl transition-colors text-sm"
+          >
+            <ArrowLeft size={16} />
+            Back to Home
           </Link>
 
-          <Link href="/jobs">
-            <Button
-              variant="bordered"
-              className="border-white/20 text-white"
-            >
-              Browse Jobs
-            </Button>
+          {/* Browse Jobs Button */}
+          <Link 
+            href="/jobs" 
+            className="inline-flex items-center justify-center border border-white/20 hover:bg-white/[0.05] text-white font-medium h-10 px-4 rounded-xl transition-colors text-sm"
+          >
+            Browse Jobs
           </Link>
+          
         </div>
 
       </div>

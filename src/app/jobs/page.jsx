@@ -38,7 +38,7 @@ export default async function JobsPage({ searchParams }) {
   };
     console.log("query",query.toString())
   const { jobs, total } = await getJobs(query.toString());
-  console.log(jobs, total);
+  // console.log(jobs, total);
 
   return <JobsClient jobs={jobs} total={total} initialFilters={filters} />;
 }

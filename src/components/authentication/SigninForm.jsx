@@ -12,8 +12,7 @@ import {
 } from "@heroui/react";
 import { Eye, EyeOff } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function SignInForm() {
@@ -25,10 +24,8 @@ export default function SignInForm() {
   });
   const router = useRouter();
 
-
-    const searchParams = useSearchParams();
-  const redirectTo= searchParams.get("redirect") || "/"
-
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,7 +39,6 @@ export default function SignInForm() {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      
     });
 
     if (data) {
@@ -107,8 +103,6 @@ export default function SignInForm() {
         <FieldError className="text-xs text-red-400 mt-1" />
       </TextField>
 
-      
-
       {status.message && (
         <div
           className={`text-sm px-4 py-3 rounded-xl border ${
@@ -128,13 +122,13 @@ export default function SignInForm() {
       >
         {isLoading ? "Signing in..." : "Sign In"}
       </Button>
+      
       <p className="text-center text-xs text-white/30 mt-6">
-            Don&apos;t have an account?{" "}
-            <Link href={`/register?redirect=${redirectTo}`} className="text-purple-400 hover:text-purple-300 transition-colors">
-              Get Started
-            </Link>
-          </p>
+        Don&apos;t have an account?{" "}
+        <Link href={`/register?redirect=${redirectTo}`} className="text-purple-400 hover:text-purple-300 transition-colors">
+          Get Started
+        </Link>
+      </p>
     </Form>
-    
   );
 }

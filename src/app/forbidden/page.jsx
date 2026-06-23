@@ -1,3 +1,4 @@
+"use client"
 import { Card, Button } from "@heroui/react";
 import { ShieldX } from "lucide-react";
 import Link from "next/link";
