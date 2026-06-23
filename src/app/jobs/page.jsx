@@ -25,13 +25,15 @@ export default async function JobsPage({ searchParams }) {
   if (sp.category) query.set("category", sp.category);
   if (sp.isRemote) query.set("isRemote", sp.isRemote);
   if (sp.salary) query.set("salary", sp.salary);
+  if (sp.page) query.set("page", sp.page);
 
   const filters = {
   search: sp.search || "",
   type: sp.jobType || "",
   category: sp.category || "",
   isRemote: sp.isRemote || "",
-  salary: sp.salary || "",
+    salary: sp.salary || "",
+  page: Number(sp.page) || 1,
   };
     console.log("query",query.toString())
   const jobs = await getJobs(query.toString());

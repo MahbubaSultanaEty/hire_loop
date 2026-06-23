@@ -5,17 +5,35 @@ import JobCard from "@/components/jobs/JobCard";
 import { Briefcase } from "lucide-react";
 import JobFilter from "./JobFilter";
 import { useRouter } from "next/navigation";
+import { Pagination } from "@heroui/react";
 
 export default function JobsClient({ jobs = [], initialFilters }) {
+  const [page, setPage] = useState(1)
+  
 const [filters, setFilters] = useState({
   search: initialFilters.search || "",
   type: initialFilters.type || "",
   category: initialFilters.category || "",
   isRemote: initialFilters.isRemote || "",
   salary: initialFilters.salary || "",
+  page: Number(initialFilters.page) || 1,
 });
-  const router = useRouter();
   
+  
+  const router = useRouter();
+
+    const totalItems = jobs.length;
+  const itemsPerPage = 9;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const getPageNumbers = () => {
+    const pages = [1, 2, 3, 4];
+    return pages;
+ }
+  
+    const startItem = 1;
+  const endItem =totalItems;
+
+
   useEffect(() => {
     const sp = new URLSearchParams();
     if (filters.search) {
@@ -32,6 +50,10 @@ if (filters.type) {
     }
     if (filters.salary !== "") {
       sp.set("salary", filters.salary)
+    }
+
+    if (page) {
+       sp.set("page", filters.page)
     }
     // console.log("serach params", sp.toString());
     const path = `?${sp.toString()}`;
@@ -85,11 +107,45 @@ if (filters.type) {
             <p className="text-white/40 text-sm">Try adjusting your filters.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <>
+               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {jobs.map((job) => (
               <JobCard key={job._id} job={job} />
             ))}
-          </div>
+              </div>
+                <Pagination className="w-full">
+      <Pagination.Summary>
+        Showing {startItem}-{endItem} of {totalItems} results
+      </Pagination.Summary>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
+            <Pagination.PreviousIcon />
+            <span>Previous</span>
+          </Pagination.Previous>
+        </Pagination.Item>
+        {getPageNumbers().map((p, i) =>
+          p === "ellipsis" ? (
+            <Pagination.Item key={`ellipsis-${i}`}>
+              <Pagination.Ellipsis />
+            </Pagination.Item>
+          ) : (
+            <Pagination.Item key={p}>
+              <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+                {p}
+              </Pagination.Link>
+            </Pagination.Item>
+          ),
+        )}
+        <Pagination.Item>
+          <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
+            <span>Next</span>
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+            </>
         )}
 
       </div>

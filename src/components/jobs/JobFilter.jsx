@@ -25,6 +25,7 @@ export default function JobFilter({ onFilterChange , filters}) {
   const [category, setCategory] = useState(filters.category || "");
   const [isRemote, setIsRemote] = useState(filters.isRemote ||"");
   const [salary, setSalary] = useState(filters.salary || "");
+  
 
 
   const handleChange = (key, value) => {
