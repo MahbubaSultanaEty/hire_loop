@@ -16,6 +16,7 @@ export const metadata = {
 export default async function JobsPage({ searchParams }) {
 
   const sp = await searchParams;
+  console.log("search p", sp)
 
   const query = new URLSearchParams();
 
@@ -25,7 +26,15 @@ export default async function JobsPage({ searchParams }) {
   if (sp.isRemote) query.set("isRemote", sp.isRemote);
   if (sp.salary) query.set("salary", sp.salary);
 
+  const filters = {
+  search: sp.search || "",
+  type: sp.jobType || "",
+  category: sp.category || "",
+  isRemote: sp.isRemote || "",
+  salary: sp.salary || "",
+  };
+    console.log("query",query.toString())
   const jobs = await getJobs(query.toString());
 
-  return <JobsClient jobs={jobs} />;
+  return <JobsClient jobs={jobs} initialFilters={filters} />;
 }

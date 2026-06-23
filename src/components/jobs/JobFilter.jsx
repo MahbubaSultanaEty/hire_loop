@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { SearchField } from "@heroui/react";
 import { SlidersHorizontal } from "lucide-react";
 
@@ -19,12 +19,13 @@ const salaryRanges = [
 
 const selectClass = "w-full bg-white/5 border border-purple-500/10 text-white/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-purple-500/40 transition-colors appearance-none cursor-pointer";
 
-export default function JobFilter({ onFilterChange }) {
-  const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
-  const [isRemote, setIsRemote] = useState("");
-  const [salary, setSalary] = useState("");
+export default function JobFilter({ onFilterChange , filters}) {
+  const [search, setSearch] = useState(filters.search || "");
+  const [type, setType] = useState(filters.type || "");
+  const [category, setCategory] = useState(filters.category || "");
+  const [isRemote, setIsRemote] = useState(filters.isRemote ||"");
+  const [salary, setSalary] = useState(filters.salary || "");
+
 
   const handleChange = (key, value) => {
     const updated = { search, type, category, isRemote, salary, [key]: value };
@@ -35,6 +36,8 @@ export default function JobFilter({ onFilterChange }) {
     if (key === "salary") setSalary(value);
     onFilterChange?.(updated);
   };
+
+  
 
   const handleReset = () => {
     setSearch(""); setType(""); setCategory(""); setIsRemote(""); setSalary("");

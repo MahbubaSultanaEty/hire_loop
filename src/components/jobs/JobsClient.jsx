@@ -6,11 +6,14 @@ import { Briefcase } from "lucide-react";
 import JobFilter from "./JobFilter";
 import { useRouter } from "next/navigation";
 
-export default function JobsClient({ jobs = [] }) {
+export default function JobsClient({ jobs = [], initialFilters }) {
 const [filters, setFilters] = useState({
-  search: "", type: "", category: "", isRemote: "", salary: "",
+  search: initialFilters.search || "",
+  type: initialFilters.type || "",
+  category: initialFilters.category || "",
+  isRemote: initialFilters.isRemote || "",
+  salary: initialFilters.salary || "",
 });
-  
   const router = useRouter();
   
   useEffect(() => {
@@ -30,7 +33,7 @@ if (filters.type) {
     if (filters.salary !== "") {
       sp.set("salary", filters.salary)
     }
-    console.log("serach params", sp.toString());
+    // console.log("serach params", sp.toString());
     const path = `?${sp.toString()}`;
     router.push(path)
   }, [router,filters.search, filters.type , filters.category, filters.isRemote, filters.salary])
@@ -52,6 +55,7 @@ if (filters.type) {
 //   });
 // }, [jobs, filters]);
 
+
   return (
     <div className="min-h-screen bg-[#0F1117] px-6 py-10 mt-20">
       <div className="max-w-7xl mx-auto">
@@ -68,7 +72,7 @@ if (filters.type) {
 
         {/* Filter */}
         <div className="mb-6">
-          <JobFilter onFilterChange={setFilters} />
+          <JobFilter onFilterChange={setFilters} filters={filters} />
         </div>
 
         {/* Jobs Grid */}
